@@ -1,3 +1,4 @@
+
 from flask import Flask, jsonify, request, abort
 from flask_bcrypt import Bcrypt
 from sqlalchemy import create_engine, text
@@ -157,10 +158,12 @@ def check_database():
 
 check_database()
 
+
 @app.route('/healthz', methods=['HEAD', 'OPTIONS'])
 @basic_auth_required
 def handle_invalid_methods():
     return jsonify(message="Method Not Allowed"), 405
+
 
 @app.route('/healthz', methods=['GET'])
 @basic_auth_required
@@ -188,7 +191,6 @@ def health_check_database():
         error_response.status_code = 503
         error_response.headers['Cache-Control'] = 'no-cache'
         return error_response
-
 
 
 if __name__ == '__main__':
